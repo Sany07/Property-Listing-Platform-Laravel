@@ -4,7 +4,7 @@
 
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+   
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -41,8 +41,9 @@
                 <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+
                                 <h4 class="card-title">All Realtors</h4>
-                                <a href="{{ route('realtor.create') }}"><span class="tr label label-info label-rounded">Add Realtors</span></a>
+                                <a href="{{ route('realtors.create') }}"><span class="tr btn btn-sm btn-rounded btn-info">Add Realtors</span></a>
                             </div>
                             <div class="table-responsive m-t-20">
                                 <table class="table table-bordered table-responsive-lg">
@@ -65,15 +66,15 @@
                                             <td>{{ $realtor -> contact_number }}</td>
                                             <td>{{ $realtor -> address }}</td>
                                             <td>
-                                            <a href="{{ route('realtor.show', $realtor -> id ) }}"><span class="label label-success label-rounded">View</span></a>
+                                            <a href="{{ route('realtors.show', $realtor -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
 
-                                            <form method="POST" action="{{ route('realtor.destroy', $realtor -> id ) }}">
+                                            <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $realtor -> id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            
-                                            <input type="submit" value="Delete" class="label label-danger label-rounded">
-                                            </td>
+                                            <button type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
+                                      
                                             </form>
+                                        </td>
                                         </tr>
                                         @endforeach
 
@@ -97,7 +98,7 @@
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
-        </div>
+ 
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->

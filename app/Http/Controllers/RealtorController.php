@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Realtor;
+use Session;
 
 class RealtorController extends Controller
 {
@@ -42,7 +43,7 @@ class RealtorController extends Controller
 
         $realtor->save();
 
-        return redirect(route('realtor.index'))->with('success', 'Realtor Added!');
+        return redirect(route('realtors.index'))->with('success', 'Realtor Added!');
     }
 
     /**
@@ -95,7 +96,7 @@ class RealtorController extends Controller
 
         $realtor->save();
 
-        return redirect(route('realtor.index'))->with('success', 'Realtor Updated!');
+        return redirect(route('realtors.index'))->with('success', 'Realtor Updated!');
 
     }
 
@@ -103,8 +104,8 @@ class RealtorController extends Controller
     {
         $realtor = Realtor::find($id);
         $realtor -> delete();
-        Session::flash('msg', 'Realtor Deleted Successfully!');
-        return redirect(route('realtor.index'));
+        Session::flash('success', 'Realtor Deleted Successfully!');
+        return redirect(route('realtors.index'));
 
     }
 }
