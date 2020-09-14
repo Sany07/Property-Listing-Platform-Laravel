@@ -1,7 +1,6 @@
-{% extends 'base.html' %}
-{% block title %} Login | {% endblock %}
-{% block content %}
+@extends('base')
 
+@section('content')
   <section id="login" class="bg-light py-5">
     <div class="container">
       <div class="row">
@@ -48,4 +47,4 @@
       </div>
     </div>
   </section>
-{% endblock %}
+@endsection

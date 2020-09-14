@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-        @include('includes/_head')
+        @include('site.includes._head')
 
     <title> 
         @yield('title') Real State
@@ -12,14 +12,14 @@
 
 
 
-    @include('includes._header')
+    @include('site.includes._header')
 
     @yield('content')
 
 
-    @include('includes/_footer')
+    @include('site.includes._footer')
 
-    @include('includes/_scripts')
+    @include('site.includes._scripts')
 
 
 

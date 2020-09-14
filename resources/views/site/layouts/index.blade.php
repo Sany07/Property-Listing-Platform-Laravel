@@ -1,4 +1,4 @@
-@extends('base')
+@extends('site.base')
 
 @section('content')
     <!-- Showcase -->
