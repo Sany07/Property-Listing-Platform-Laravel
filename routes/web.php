@@ -13,28 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Auth::routes();
+
+
+Route::get('/', function () { 
     return view('site.layouts.index');
 });
 
-Auth::routes();
+Route::get('/about', 'FrontEndController@about' )->name('about');
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 
 
 Route::group(['prefix' => 'admin', ], function() {
+    Route::get('/home', 'AdminController@index' )->name('admin.index');
+        
+    Route::resource('realtor', 'RealtorController');
+});
+
+
+
     // Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     // Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     // Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     
     // Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     
-    Route::get('/', function () {
-        return view('site.layouts.index');
-    });
-    Route::get('/s', 'AdminController@index')->name('admin.dashboard');
-    
-    
-    Route::resource('realtor', 'RealtorController');
-});

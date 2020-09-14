@@ -3,38 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Realtor;
 
 class RealtorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('site.layouts.index');
+        $realtors = Realtor::all();
+        return view('admin.layouts.realtors', compact('realtors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admin.layouts.add_realtor');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'email'=>'required',
+            'contact_number'=>'required'
+        ]);
+
+        $realtor = new Realtor([
+            'name' => $request->get('name'),
+            'address' => $request->get('address'),
+            'email' => $request->get('email'),
+            'contact_number' => $request->get('contact_number'),
+         
+        ]);
+
+      
+
+        $realtor->save();
+
+        return redirect(route('realtor.index'))->with('success', 'Realtor Added!');
     }
 
     /**
@@ -45,7 +53,8 @@ class RealtorController extends Controller
      */
     public function show($id)
     {
-        //
+        $realtor = Realtor::find($id);
+        return view('admin.layouts.realtor', compact('realtor'));
     }
 
     /**
@@ -56,7 +65,8 @@ class RealtorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $realtor = Realtor::find($id);
+        return view('admin.layouts.realtor', compact('realtor'));
     }
 
     /**
@@ -68,17 +78,33 @@ class RealtorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'email'=>'required',
+            'contact_number'=>'required'
+        ]);
+
+        $realtor = Realtor::find($id);
+
+   
+        $realtor -> name = $request->get('name');
+        $realtor -> address = $request->get('address');
+        $realtor -> email = $request->get('email');
+        $realtor -> contact_number = $request->get('contact_number');
+
+        $realtor->save();
+
+        return redirect(route('realtor.index'))->with('success', 'Realtor Updated!');
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $realtor = Realtor::find($id);
+        $realtor -> delete();
+        Session::flash('msg', 'Realtor Deleted Successfully!');
+        return redirect(route('realtor.index'));
+
     }
 }
