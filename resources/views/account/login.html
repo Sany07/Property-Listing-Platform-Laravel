@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} Login | {% endblock %}
+{% block content %}
+
+  <section id="login" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4>
+                <i class="fas fa-sign-in-alt"></i> Login</h4>
+            </div>
+            {% if form.errors %}
+              {% for field in form %}
+                  {% for error in field.errors %}
+                      <div class="alert alert-danger alert-dismissable">
+                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                          <strong>{{ error|escape }}</strong>
+                      </div>
+                  {% endfor %}
+              {% endfor %}
+              {% for error in form.non_field_errors %}
+                  <div class="alert alert-danger alert-dismissable">
+                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <strong>{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+            {% endif %}
+            <div class="card-body">
+              <form action="" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+
+                  <div class="form-group">
+                    <label for="id_{{ field.name }}">{{ field.label }}</label>
+                    <input type="{{ field.field.widget.input_type }}" class="form-control" name="{{ field.name }}"
+                      id="id_{{ field.name }}" required>
+                  </div>
+
+                {% endfor %}
+
+                <input type="submit" value="Login" class="btn btn-secondary btn-block">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
