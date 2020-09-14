@@ -71,7 +71,7 @@
                                             @csrf
                                             @method('DELETE')
                                             
-                                            <input type="submit" class="label label-danger label-rounded">Update
+                                            <input type="submit" value="Delete" class="label label-danger label-rounded">
                                             </td>
                                             </form>
                                         </tr>
