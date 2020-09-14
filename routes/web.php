@@ -27,7 +27,7 @@ Route::get('/about', 'FrontEndController@about' )->name('about');
 
 
 Route::group(['prefix' => 'admin', ], function() {
-    Route::get('/home', 'AdminController@index' )->name('admin.index');
+    Route::get('/dashboard', 'AdminController@index' )->name('admin.index');
         
     Route::resource('realtors', 'RealtorController');
 });
