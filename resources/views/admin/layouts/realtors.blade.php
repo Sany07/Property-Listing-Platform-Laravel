@@ -67,7 +67,7 @@
                                             <td>
                                             <a href="{{ route('realtor.show', $realtor -> id ) }}"><span class="label label-success label-rounded">View</span></a>
 
-                                            <form action="{{ route('realtor.destroy', $realtor -> id ) }}">
+                                            <form method="POST" action="{{ route('realtor.destroy', $realtor -> id ) }}">
                                             @csrf
                                             @method('DELETE')
                                             
