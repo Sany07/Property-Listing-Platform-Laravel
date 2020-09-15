@@ -60,7 +60,7 @@
                                     <tbody>
                                         @foreach($realtors as $realtor)
                                         <tr>
-                                            <th scope="row">{{ $realtor -> id }}</th>
+                                            <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $realtor -> name }}</td>
                                             <td>{{ $realtor -> email }}</td>
                                             <td>{{ $realtor -> contact_number }}</td>

@@ -44,7 +44,7 @@
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="../../assets/images/users/5.jpg" class="rounded-circle" width="150" />
+                                <center class="m-t-30"> <img src="{{ url($realtor->image) }}" class="rounded-circle" width="150" />
                                     <h4 class="card-title m-t-10">{{ $realtor -> name }}</h4>
                                     <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
 

@@ -19,6 +19,7 @@ class CreateRealtorsTable extends Migration
             $table->string('address');
             $table->string('email');
             $table->string('contact_number');
+            $table->string('image');
             $table->timestamps();
 
         });

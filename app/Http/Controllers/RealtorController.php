@@ -28,7 +28,8 @@ class RealtorController extends Controller
             'name'=>'required',
             'address'=>'required',
             'email'=>'required',
-            'contact_number'=>'required'
+            'contact_number'=>'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
         $realtor = new Realtor([
@@ -36,12 +37,20 @@ class RealtorController extends Controller
             'address' => $request->get('address'),
             'email' => $request->get('email'),
             'contact_number' => $request->get('contact_number'),
-         
+        
         ]);
-
-      
-
-        $realtor->save();
+    
+            $image_new_name = $request->name.'.'.time().'.'.$request->image->getClientOriginalExtension();  
+            $isScucess = $request->image->move(public_path('realtor'), $image_new_name);
+            
+            if($isScucess){
+                $image_url = 'realtor/'.$image_new_name;
+                $realtor->image = $image_url;
+                $realtor->save();
+            }
+ 
+        // $realtor->save();
+        // $realtor->save();
 
         return redirect(route('realtors.index'))->with('success', 'Realtor Added!');
     }

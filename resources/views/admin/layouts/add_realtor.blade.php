@@ -50,7 +50,7 @@
                     </ul>
                 </div><br />
                 @endif
-                    <form action="{{ route('realtors.store') }}" method="POST" class="form-horizontal m-t-30">
+                    <form action="{{ route('realtors.store') }}" method="POST" class="form-horizontal m-t-30" enctype="multipart/form-data"> 
                         @csrf
                         
                         <div class="form-group">
@@ -79,8 +79,7 @@
                                     <span class="input-group-text">Upload</span>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                <input type="file" name="image" class="form-control">
                                 </div>
                             </div>
                         </div>
