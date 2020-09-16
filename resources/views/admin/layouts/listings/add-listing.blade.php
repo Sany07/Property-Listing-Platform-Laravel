@@ -73,14 +73,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Custom File upload</label>
+                            <label>Upload Image</label>
                             <div class="input-group">
-                                <div class="input-group-prepend">
+                                <!-- <div class="input-group-prepend">
                                     <span class="input-group-text">Upload</span>
-                                </div>
+                                </div> -->
                                 <div class="custom-file">
                                 <input type="file" name="image" class="form-control">
                                 </div>
+
                             </div>
                         </div>
 

@@ -59,7 +59,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach($realtors as $realtor)
-                                        <tr>
+                                        <tr id="row_{{$realtor->id}}">
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $realtor -> name }}</td>
                                             <td>{{ $realtor -> email }}</td>
@@ -71,9 +71,9 @@
                                             <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $realtor -> id) }}">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
-                                      
-                                            </form>
+                                            
+                                        </form>
+                                        <button onclick="deleteData('{{ route('realtors.destroy', $realtor -> id) }}','{{ $realtor -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
                                         </td>
                                         </tr>
                                         @endforeach
@@ -102,4 +102,6 @@
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
+
+        
 @endsection

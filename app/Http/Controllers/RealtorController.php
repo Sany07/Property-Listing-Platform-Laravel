@@ -12,12 +12,12 @@ class RealtorController extends Controller
     public function index()
     {
         $realtors = Realtor::all();
-        return view('admin.layouts.realtors', compact('realtors'));
+        return view('admin.layouts.realtors.realtors', compact('realtors'));
     }
 
     public function create()
     {
-        return view('admin.layouts.add_realtor');
+        return view('admin.layouts.realtors.add_realtor');
     }
 
 
@@ -40,52 +40,25 @@ class RealtorController extends Controller
         
         ]);
     
-            $image_new_name = $request->name.'.'.time().'.'.$request->image->getClientOriginalExtension();  
-            $isScucess = $request->image->move(public_path('realtor'), $image_new_name);
-            
-            if($isScucess){
-                $image_url = 'realtor/'.$image_new_name;
-                $realtor->image = $image_url;
-                $realtor->save();
-            }
- 
-        // $realtor->save();
-        // $realtor->save();
-
-        return redirect(route('realtors.index'))->with('success', 'Realtor Added!');
+        //call custom file upload function
+        $isSuccess = $this -> imageUploadHandler($request->image, $request->name, $realtor);
+        
+        if($isSuccess){
+            return redirect(route('realtors.index'))->with('success', 'Realtor Added!');
+        }else{
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
+     
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        $realtor = Realtor::find($id);
-        return view('admin.layouts.realtor', compact('realtor'));
+        $realtor = Realtor::findOrFail($id);
+        return view('admin.layouts.realtors.single_realtor', compact('realtor'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $realtor = Realtor::find($id);
-        return view('admin.layouts.realtor', compact('realtor'));
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -95,26 +68,60 @@ class RealtorController extends Controller
             'contact_number'=>'required'
         ]);
 
-        $realtor = Realtor::find($id);
-
-   
+        $realtor = Realtor::findOrFail($id);
         $realtor -> name = $request->get('name');
         $realtor -> address = $request->get('address');
         $realtor -> email = $request->get('email');
         $realtor -> contact_number = $request->get('contact_number');
+        
+        //storing redirect route & success message
+        $successMessage = redirect(route('realtors.index'))->with('success', 'Realtor Updated!');
 
-        $realtor->save();
+        if(!$request->image){
+            $realtor->save();
+            return $successMessage;
+        }
+        else if(file_exists($realtor->image)){  //check the file exist or not
 
-        return redirect(route('realtors.index'))->with('success', 'Realtor Updated!');
-
+            $done= unlink($realtor->image);
+        }
+        //call custom file upload function
+        $isSuccess = $this -> imageUploadHandler($request->image, $request->name, $realtor);
+        
+        if($isSuccess){
+            return $successMessage;
+        }else{
+            return redirect()->back()->with('error', 'Something went wrong!');
+        }
     }
 
     public function destroy($id)
     {
-        $realtor = Realtor::find($id);
+        $realtor = Realtor::findOrFail($id);
+        $image_path = $realtor->image;
+        
+        if(file_exists($image_path)){
+            unlink($image_path);                
+        }
         $realtor -> delete();
-        Session::flash('success', 'Realtor Deleted Successfully!');
-        return redirect(route('realtors.index'));
+        return redirect(route('realtors.index'))->with('success', 'Realtor Deleted Successfully!');
+        
+    }
 
+    private function imageUploadHandler($image,$name, $realtor)
+    {
+
+        $image_new_name = $name.'.'.time().'.'.$image->getClientOriginalExtension();  
+        $isScucess = $image->move(public_path('realtor'), $image_new_name);
+    
+        if($isScucess){
+            $image_url = 'realtor/'.$image_new_name;
+            $realtor->image = $image_url;
+            $realtor->save();
+            
+            return TRUE;
+        return FALSE;
+            
+        }
     }
 }

@@ -44,9 +44,9 @@
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <center class="m-t-30"> <img src="{{ url($realtor->image) }}" class="rounded-circle" width="150" />
+                                <center class="m-t-30"> <img src="{{ url($realtor->image) }}" class="rounded-circle mb-5" width="150" height="150" />
                                     <h4 class="card-title m-t-10">{{ $realtor -> name }}</h4>
-                                    <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+
 
                                 </center>
                             </div>
@@ -64,7 +64,7 @@
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
                             <div class="card-body">
-                            <form action="{{ route('realtors.update', $realtor -> id) }}" method="POST" class="form-horizontal m-t-30">
+                            <form action="{{ route('realtors.update', $realtor -> id) }}" method="POST" class="form-horizontal m-t-30" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH') 
                         
@@ -94,8 +94,7 @@
                                     <span class="input-group-text">Upload</span>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                <input type="file" name="image" class="form-control">
                                 </div>
                             </div>
                         </div>

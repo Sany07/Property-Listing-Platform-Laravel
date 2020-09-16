@@ -132,4 +132,6 @@ $(function() {
         $('.left-part').toggleClass('show-panel');
         $('.show-left-part').toggleClass('ti-menu');
     });
+
 });
+
