@@ -52,28 +52,27 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Contact</th>
+                                            <!-- <th scope="col">Contact</th>
                                             <th scope="col">Image</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col">Action</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($realtors as $realtor)
-                                        <tr id="row_{{$realtor->id}}">
+                                        @foreach($listings as $listing)
+                                        <tr id="row_{{$listing->id}}">
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $realtor -> name }}</td>
-                                            <td>{{ $realtor -> email }}</td>
-                                            <td>{{ $realtor -> contact_number }}</td>
-                                            <td>{{ $realtor -> address }}</td>
+                                            <td>{{ $listing -> title }}</td>
+                                            <td>{{ $listing -> price }}</td>
+                                           
                                             <td>
-                                            <a href="{{ route('realtors.show', $realtor -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
+                                            <a href="{{ route('realtors.show', $listing -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
 
-                                            <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $realtor -> id) }}">
+                                            <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $listing -> id) }}">
                                             @csrf
                                             @method('DELETE')
                                             
                                         </form>
-                                        <button onclick="deleteData('{{ route('realtors.destroy', $realtor -> id) }}','{{ $realtor -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
+                                        <button onclick="deleteData('{{ route('realtors.destroy', $listing -> id) }}','{{ $listing -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
                                         </td>
                                         </tr>
                                         @endforeach

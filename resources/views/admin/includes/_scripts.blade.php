@@ -15,6 +15,7 @@
     <!--Custom JavaScript -->
     <script src="{{ asset('admin/dist/js/sweet-alert.js' ) }}"></script>
     <script src="{{ asset('admin/dist/js/ajax-call.js' ) }}"></script>
+    <script src="{{ asset('admin/dist/js/bs-custom-file-input.min.js' ) }}"></script>
     <script src="{{ asset('admin/dist/js/custom.min.js' ) }}"></script>
 
     <!--This page JavaScript -->
