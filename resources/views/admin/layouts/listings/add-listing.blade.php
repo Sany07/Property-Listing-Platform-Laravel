@@ -55,32 +55,32 @@
                         
                         <div class="form-group">
                             <label>Property Title :</label>
-                            <input type="text" name="title" class="form-control" placeholder="Name">
+                            <input type="text" name="title" class="form-control" value="{{ old('title') }}" placeholder="Name">
                         </div>
                         <div class="form-group">
                             <label>Price :</label>
-                            <input type="number" name="price" class="form-control" placeholder="Price">
+                            <input type="number" name="price" class="form-control" value="{{ old('price') }}"  placeholder="Price">
                         </div>
                         <div class="form-group">
                             <label>Square Feet :</label>
-                            <input type="number" name="square_feet" class="form-control" placeholder="Square Feet">
+                            <input type="number" name="square_feet" class="form-control" value="{{ old('square_feet') }}"  placeholder="Square Feet">
                         </div>
                         <div class="form-group">
                             <label>Lot Size :</label>
-                            <input type="number" name="lot_size" class="form-control" placeholder="Lot Size">
+                            <input type="number" name="lot_size" class="form-control"  value="{{ old('lot_size') }}" placeholder="Lot Size">
                         </div>
                         <div class="form-group">
                             <label>Bedroom :</label>
-                            <input type="number" name="bedroom" class="form-control" placeholder="Bedroom">
+                            <input type="number" name="bedroom" class="form-control" value="{{ old('bedroom') }}" placeholder="Bedroom">
                         </div>
   
                         <div class="form-group">
                             <label>Garage :</label>
-                            <input type="number" name="garage" class="form-control" placeholder="Garage">
+                            <input type="number" name="garage" class="form-control"  value="{{ old('garage') }}" placeholder="Garage">
                         </div>
                         <div class="form-group">
                             <label>Description :</label>
-                            <textarea name="description" class="form-control" rows="5"></textarea>
+                            <textarea name="description" class="form-control" rows="5">{{ old('description') }}</textarea>
                         </div>
 
                         <div class="form-group">
@@ -158,7 +158,7 @@
                                 <select  name="realtor_id" class="form-control form-control-line" required>
                                 <option selected style="display:none">Select Realtor</option>
                                 @foreach($realtors as $realtor)
-                                    <option value="{{ $realtor->id }}">{{ $realtor->name }}</option>
+                                    <option value="{{ $realtor->id }}" >{{ $realtor->name }}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -167,10 +167,10 @@
                         <div class="form-group">
                             <label class="col-sm-12">Is Publish :</label>
                             <div class="col-sm-12">
-                                <select  name="is_publish" class="form-control form-control-line" required>
+                                <select  name="is_published" class="form-control form-control-line"  required>
                                 <option selected style="display:none">Select Publish/Draft</option>
-                                    <option value="1">Publish</option>
-                                    <option value="0">Un Publish</option>
+                                    <option @if (old('is_published') == "1") {{ 'selected' }} @endif value="1">Publish</option>
+                                    <option @if (old('is_published') == "0") {{ 'selected' }} @endif  value="0">Draft</option>
                                 </select>
                             </div>
                         </div>

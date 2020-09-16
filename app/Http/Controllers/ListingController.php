@@ -12,7 +12,7 @@ class ListingController extends Controller
 
     public function index()
     {
-        $listings = Listing::orderBy('id', 'DESC')->where('is_publish', true)->get();
+        $listings = Listing::orderBy('id', 'DESC')->where('is_published', 1)->get();
         return view('admin.layouts.listings.listings', compact('listings'));
     }
 
@@ -41,6 +41,7 @@ class ListingController extends Controller
             'lot_size'=>'required',
             'garage'=>'required',
             'bedroom'=>'required',
+            'is_published'=>'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
@@ -53,6 +54,7 @@ class ListingController extends Controller
             'bedroom' => $request->get('bedroom'),
             'garage' => $request->get('garage'),
             'realtor_id' => $request->get('realtor_id'),
+            'is_published' => $request->get('is_published'),
         
         ]);
 
