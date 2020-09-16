@@ -12,7 +12,7 @@ class ListingController extends Controller
 
     public function index()
     {
-        $listings = Listing::orderBy('id', 'DESC')->where('is_published', 1)->get();
+        $listings = Listing::orderBy('id', 'DESC')->where('is_published', '1')->get();
         return view('admin.layouts.listings.listings', compact('listings'));
     }
 
