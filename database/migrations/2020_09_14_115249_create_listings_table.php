@@ -34,6 +34,7 @@ class CreateListingsTable extends Migration
             $table->foreignId('realtor_id')->nullable()
                     ->constrained()
                     ->onDelete('cascade');
+            $table-> enum('is_published',['0','1']);
 
         });
     }

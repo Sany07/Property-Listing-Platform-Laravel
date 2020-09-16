@@ -164,6 +164,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-sm-12">Is Publish :</label>
+                            <div class="col-sm-12">
+                                <select  name="is_publish" class="form-control form-control-line" required>
+                                <option selected style="display:none">Select Publish/Draft</option>
+                                    <option value="1">Publish</option>
+                                    <option value="0">Un Publish</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
                 </div>
