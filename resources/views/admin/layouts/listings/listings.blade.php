@@ -65,14 +65,14 @@
                                             <td>{{ $listing -> price }}</td>
                                            
                                             <td>
-                                            <a href="{{ route('realtors.show', $listing -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
+                                            <a href="{{ route('listings.show', $listing -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
 
-                                            <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $listing -> id) }}">
+                                            <!-- <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $listing -> id) }}">
                                             @csrf
                                             @method('DELETE')
                                             
-                                        </form>
-                                        <button onclick="deleteData('{{ route('realtors.destroy', $listing -> id) }}','{{ $listing -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
+                                            </form> -->
+                                        <button onclick="deleteData('{{ route('listings.destroy', $listing -> id) }}','{{ $listing -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
                                         </td>
                                         </tr>
                                         @endforeach
