@@ -80,11 +80,6 @@ class ListingController extends Controller
     }
 
 
-    public function edit($id)
-    {
-        //
-    }
-
 
     public function update(Request $request, $id)
     {
@@ -130,7 +125,7 @@ class ListingController extends Controller
     //method for mass image upload
     private function massimageUploadHandler($request, $listing)
     {
-        
+        $isSuccess = FALSE;
         $images = array(
             $request->image, 
             $request->image_one, 
@@ -142,14 +137,15 @@ class ListingController extends Controller
         );
         
         foreach ($images as $key => $image) {
+
            
             if(file_exists($image)){
                 
-                //delete old image when perform update functionality
-                $isSuccess =  $this->imageUploadHandler($image,$listing,$key);                
-                return $isSuccess;
+                $isSuccess =$this->imageUploadHandler($image,$listing,$key);                
+                
             }            
-        }         
+        }
+        return $isSuccess;         
         
     }
 
@@ -163,7 +159,7 @@ class ListingController extends Controller
             $table_name = 'thumbnail_'.$key;
             if(file_exists($listing->$table_name)){
                 unlink($listing->$table_name);                
-            }
+            }            
             $listing->$table_name = $image_url;    
 
             return TRUE;

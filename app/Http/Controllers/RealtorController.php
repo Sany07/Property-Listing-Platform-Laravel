@@ -99,10 +99,9 @@ class RealtorController extends Controller
     public function destroy($id)
     {
         $realtor = Realtor::findOrFail($id);
-        $image_path = $realtor->image;
         
-        if(file_exists($image_path)){
-            unlink($image_path);                
+        if(file_exists($realtor->image)){
+            unlink($realtor->image);                
         }
         $realtor -> delete();
         return redirect(route('realtors.index'))->with('success', 'Realtor Deleted Successfully!');
