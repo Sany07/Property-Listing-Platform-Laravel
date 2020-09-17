@@ -75,13 +75,11 @@
                         <div class="form-group">
                             <label>Upload Image</label>
                             <div class="input-group">
-                                <!-- <div class="input-group-prepend">
-                                    <span class="input-group-text">Upload</span>
-                                </div> -->
                                 <div class="custom-file">
-                                <input type="file" name="image" class="form-control">
+                                    <input type="file" name="image" class="custom-file-input">
+                                <label for="image" class="custom-file-label"> Choose Image
+                                </label>                              
                                 </div>
-
                             </div>
                         </div>
 

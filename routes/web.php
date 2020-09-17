@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,11 +25,12 @@ Route::get('/about', 'FrontEndController@about' )->name('about');
 
 
 
-Route::group(['prefix' => 'admin', ], function() {
-    Route::get('/dashboard', 'AdminController@index' )->name('admin.index');
-        
+Route::group(['prefix' => 'admin'], function() {
+
+    Route::get('index', 'AdminController@index' )->name('admin.index');
     Route::resource('listings', 'ListingController');
     Route::resource('realtors', 'RealtorController');
+
 });
 
 

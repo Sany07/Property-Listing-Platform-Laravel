@@ -14,11 +14,11 @@ class Realtor extends Model
 
     public function listing(){
 
-        return $this->belongsTo(listing::class);
+        return $this->hasOne(Listing::class);
     }
 
-    public function realtor(){
+    public function som(){
 
-        return $this->belongsTo(Realtor::class);
+        return $this->belongsTo(Som::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Realtor;
+use App\Listing;
 use Session;
 
 class RealtorController extends Controller
@@ -11,7 +12,7 @@ class RealtorController extends Controller
 
     public function index()
     {
-        $realtors = Realtor::all();
+        $realtors = Realtor::with("Listing")->get();
         return view('admin.layouts.realtors.realtors', compact('realtors'));
     }
 
@@ -81,9 +82,9 @@ class RealtorController extends Controller
             $realtor->save();
             return $successMessage;
         }
-        else if(file_exists($realtor->image)){  //check the file exist or not
+        elseif(file_exists($realtor->image)){  //check the file exist or not
 
-            $done= unlink($realtor->image);
+            unlink($realtor->image);
         }
         //call custom file upload function
         $isSuccess = $this -> imageUploadHandler($request->image, $request->name, $realtor);
@@ -112,10 +113,10 @@ class RealtorController extends Controller
     {
 
         $image_new_name = $name.'.'.time().'.'.$image->getClientOriginalExtension();  
-        $isScucess = $image->move(public_path('realtor'), $image_new_name);
+        $isScucess = $image->move(public_path('images/realtor'), $image_new_name);
     
         if($isScucess){
-            $image_url = 'realtor/'.$image_new_name;
+            $image_url = 'images/realtor/'.$image_new_name;
             $realtor->image = $image_url;
             $realtor->save();
             

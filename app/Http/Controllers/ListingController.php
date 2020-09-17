@@ -12,7 +12,7 @@ class ListingController extends Controller
 
     public function index()
     {
-        $listings = Listing::orderBy('id', 'DESC')->where('is_published', '1')->get();
+        $listings = Listing::orderBy('id', 'DESC')->get();
         return view('admin.layouts.listings.listings', compact('listings'));
     }
 
@@ -28,9 +28,9 @@ class ListingController extends Controller
     public function store(Request $request)
     {
         // 'title','description', 'price', 'square_feet','lot_size',
-        // 'bedroom','garage', 'main_thumbnail','extra_thumbnail_1',
-        // 'extra_thumbnail_2','extra_thumbnail_3','extra_thumbnail_4',
-        // 'extra_thumbnail_5','extra_thumbnail_6','realtor_id'
+        // 'bedroom','garage', 'main_thumbnail','thumbnail_1',
+        // 'thumbnail_2','thumbnail_3','thumbnail_4',
+        // 'thumbnail_5','thumbnail_6','realtor_id'
         
         $request->validate([
             'title'=>'required',
@@ -75,7 +75,8 @@ class ListingController extends Controller
 
     public function show($id)
     {
-        return view('admin.layouts.listings.single-listing');
+        $listing = Listing::findOrFail($id);
+        return view('admin.layouts.listings.single-listing',compact('listing'));
     }
 
 
@@ -87,68 +88,105 @@ class ListingController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        $listing = Listing::findOrFail($id);
+
+
+        $listing ->title = $request->get('title');
+        $listing ->description = $request->get('description');
+        $listing ->price= $request->get('price');
+        $listing ->square_feet= $request->get('square_feet');
+        $listing ->lot_size= $request->get('lot_size');
+        $listing ->garage= $request->get('garage');
+        $listing ->bedroom= $request->get('bedroom');
+        $listing ->realtor_id = $request->get('realtor_id');
+        $listing ->is_published = $request->get('is_published');
+
+
+        //function for image upload
+        $this -> massimageUploadHandler($request, $listing);
+        $listing->save();
+        return redirect(route('listings.index'))->with('success', 'Listing Updated Successfully!');
+        
     }
 
 
     public function destroy($id)
     {
-        //
+        $listing = Listing::findOrFail($id);
+    
+        $isSuccess = $listing -> delete();
+
+        if($isSuccess){
+            $this -> imageDeleteHandler($listing);
+        }
+        return redirect(route('listings.index'))->with('success', 'Listing Deleted Successfully!');
+        
     }
 
 
     //method for mass image upload
     private function massimageUploadHandler($request, $listing)
     {
-
-        if($request->image){
-            //here 3rd peramiter is listing table colum name
-            $isSuccess = $this->imageUploadHandler($request->image,$listing, 'main_thumbnail');
-            
-        }
-
-        if(!$request->image_one == NULL){
-            
-        $isSuccess = $this->imageUploadHandler($request->image_one,$listing, 'extra_thumbnail_1');
         
-        }
-        if(!$request->image_two == NULL){
-            $isSuccess = $this->imageUploadHandler($request->image_two,$listing, 'extra_thumbnail_2');
-        }
-        if(!$request->image_three == NULL){
-            $isSuccess =$this->imageUploadHandler($request->image_three,$listing, 'extra_thumbnail_3');
-                
-            }
-        if(!$request->image_four == NULL){
-            $this->imageUploadHandler($request->image_four,$listing, 'extra_thumbnail_4');
-                
-            }
-        if(!$request->image_five == NULL){
-                $this->imageUploadHandler($request->image_five,$listing, 'extra_thumbnail_5');
-                
-            }
-        if(!$request->image_six == NULL){
-                $this->imageUploadHandler($request->image_six,$listing, 'extra_thumbnail_6');
-                
-            }
+        $images = array(
+            $request->image, 
+            $request->image_one, 
+            $request->image_two, 
+            $request->image_three, 
+            $request->image_four, 
+            $request->image_five, 
+            $request->image_six, 
+        );
         
-    return $isSuccess;
-
-
+        foreach ($images as $key => $image) {
+           
+            if(file_exists($image)){
+                
+                //delete old image when perform update functionality
+                $isSuccess =  $this->imageUploadHandler($image,$listing,$key);                
+                return $isSuccess;
+            }            
+        }         
+        
     }
 
     //method for image upload
 
-    private function imageUploadHandler($image, $listing, $table_name){
-        $image_new_name = $image->getClientOriginalName().'.'.time().'.'.$image->getClientOriginalExtension();  
-        $isScucess = $image->move(public_path('listing'), $image_new_name);
+    private function imageUploadHandler($image, $listing, $key){
+        $image_new_name = time().'.'.$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();  
+        $isScucess = $image->move(public_path('images/listing'), $image_new_name);
         if($isScucess){
-            $image_url = 'listing/'.$image_new_name;
-            $listing->$table_name = $image_url;            
+            $image_url = 'images/listing/'.$image_new_name;
+            $table_name = 'thumbnail_'.$key;
+            if(file_exists($listing->$table_name)){
+                unlink($listing->$table_name);                
+            }
+            $listing->$table_name = $image_url;    
+
             return TRUE;
         return FALSE;
             
         }        
+    }
 
+    //method for delete image from folder
+    private function imageDeleteHandler($listing){
+        $images = array(
+            $listing->thumbnail_0, 
+            $listing->thumbnail_1,
+            $listing->thumbnail_2,
+            $listing->thumbnail_3,
+            $listing->thumbnail_4,
+            $listing->thumbnail_5,
+            $listing->thumbnail_6,
+        );
+        foreach ($images as $image) {
+            if(file_exists($image)){
+                unlink($image);                
+            }            
+        }
     }
 }

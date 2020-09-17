@@ -23,13 +23,13 @@ class CreateListingsTable extends Migration
             $table->float('lot_size', 10, 2);
             $table->integer('bedroom');
             $table->integer('garage');
-            $table->string('main_thumbnail');
-            $table->string('extra_thumbnail_1')->nullable();
-            $table->string('extra_thumbnail_2')->nullable();
-            $table->string('extra_thumbnail_3')->nullable();
-            $table->string('extra_thumbnail_4')->nullable();
-            $table->string('extra_thumbnail_5')->nullable();
-            $table->string('extra_thumbnail_6')->nullable();
+            $table->string('thumbnail_0');
+            $table->string('thumbnail_1')->nullable();
+            $table->string('thumbnail_2')->nullable();
+            $table->string('thumbnail_3')->nullable();
+            $table->string('thumbnail_4')->nullable();
+            $table->string('thumbnail_5')->nullable();
+            $table->string('thumbnail_6')->nullable();
             $table->timestamps();
             $table->foreignId('realtor_id')->nullable()
                     ->constrained()

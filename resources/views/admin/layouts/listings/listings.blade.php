@@ -42,19 +42,21 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">All Realtors</h4>
-                                <a href="{{ route('realtors.create') }}"><span class="tr btn btn-sm btn-rounded btn-info">Add Realtors</span></a>
+                                <h4 class="card-title">All Listings</h4>
+                                <a href="{{ route('listings.create') }}"><span class="tr btn btn-sm btn-rounded btn-info">Add Realtors</span></a>
                             </div>
                             <div class="table-responsive m-t-20">
                                 <table class="table table-bordered table-responsive-lg">
                                     <thead>
                                         <tr>
+
                                             <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <!-- <th scope="col">Contact</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Realtor</th>
                                             <th scope="col">Image</th>
-                                            <th scope="col">Action</th> -->
+                                            <th scope="col">Published/Draft</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,16 +65,26 @@
                                             <th scope="row">{{ $loop->iteration }}</th>
                                             <td>{{ $listing -> title }}</td>
                                             <td>{{ $listing -> price }}</td>
+                                            <td>{{ $listing -> realtor-> name }}</td>
+                                            <td><img src="{{ url($listing -> thumbnail_0) }}" alt="" srcset="" style="width:70px;height=70pxpx"></td>
+                                            <td>@if ( $listing -> is_published == '1' )
+                                                    Published
+                                                @else
+                                                    Draft
+                                                @endif
+                                            </td>
                                            
                                             <td>
                                             <a href="{{ route('listings.show', $listing -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
 
-                                            <!-- <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $listing -> id) }}">
+                                            <form style="display:inline-block" method="POST" action="{{ route('listings.destroy', $listing -> id) }}">
                                             @csrf
                                             @method('DELETE')
                                             
-                                            </form> -->
-                                        <button onclick="deleteData('{{ route('listings.destroy', $listing -> id) }}','{{ $listing -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
+                                           <button  type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
+                                            </form>
+                                           <button onclick="deleteData('{{ route('listings.destroy', $listing -> id) }}','{{ $listing -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
+
                                         </td>
                                         </tr>
                                         @endforeach
