@@ -30,6 +30,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('index', 'AdminController@index' )->name('admin.index');
     Route::resource('listings', 'ListingController');
     Route::resource('realtors', 'RealtorController');
+    Route::resource('som', 'SellerOftheMonth');
 
 });
 
