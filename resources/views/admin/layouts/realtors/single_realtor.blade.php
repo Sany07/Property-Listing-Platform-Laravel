@@ -45,6 +45,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <center class="m-t-30"> <img src="{{ url($realtor->image) }}" class="rounded-circle mb-5" width="150" height="150" />
+                                   
                                     <h4 class="card-title m-t-10">{{ $realtor -> name }}</h4>
 
 

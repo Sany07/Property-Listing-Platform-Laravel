@@ -66,7 +66,7 @@
                                             <td>{{ $listing -> title }}</td>
                                             <td>{{ $listing -> price }}</td>
                                             <td>{{ $listing -> realtor-> name }}</td>
-                                            <td><img src="{{ url($listing -> thumbnail_0) }}" alt="" srcset="" style="width:70px;height=70pxpx"></td>
+                                            <td><img src="{{ url($listing -> thumbnail_0) }}" alt="" srcset="" style="width:70px;height:50px"></td>
                                             <td>@if ( $listing -> is_published == '1' )
                                                     Published
                                                 @else

@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Listing;
 
 class FrontEndController extends Controller
 {
     public function index()
     {
-        return view('site.layouts.index');
+
+
+        $latest_listings = Listing::all();
+        return view('site.layouts.index', compact('latest_listings'));
     }
 
     public function about()

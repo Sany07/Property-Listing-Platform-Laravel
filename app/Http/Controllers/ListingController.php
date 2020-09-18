@@ -41,6 +41,7 @@ class ListingController extends Controller
             'lot_size'=>'required',
             'garage'=>'required',
             'bedroom'=>'required',
+            'realtor_id'=>'required',
             'is_published'=>'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);

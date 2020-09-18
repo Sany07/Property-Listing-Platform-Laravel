@@ -134,47 +134,52 @@
             <div class="row">
                 <!-- Listings -->
                 <!-- for listing in listings -->
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card listing-preview">
-                            <img class="card-img-top" src="" alt="">
-                            <div class="card-img-overlay">
-                                <h2>
-                                    <span class="badge badge-secondary text-white"> </span>
-                                </h2>
-                            </div>
-                            <div class="card-body">
-                                <div class="listing-heading text-center">
-                                    <h4 class="text-primary"></h4>
-                                    <p>
-                                        <i class="fas fa-map-marker text-secondary"></i> </p>
-                                </div>
-                                <hr>
-                                <div class="row py-2 text-secondary">
-                                    <div class="col-6">
-                                        <i class="fas fa-th-large"></i> Sqft: </div>
-                                    <div class="col-6">
-                                        <i class="fas fa-car"></i> Garage: </div>
-                                </div>
-                                <div class="row py-2 text-secondary">
-                                    <div class="col-6">
-                                        <i class="fas fa-bed"></i> Bedrooms: </div>
-                                    <div class="col-6">
-                                        <i class="fas fa-bath"></i> Bathrooms: </div>
-                                </div>
-                                <hr>
-                                <div class="row py-2 text-secondary">
-                                    <div class="col-6">
-                                        <i class="fas fa-user"></i> Kyle Brown</div>
-                                </div>
-                                <div class="row text-secondary pb-2">
-                                    <div class="col-6">
-                                        <i class="fas fa-clock"></i> </div>
-                                </div>
-                                <hr>
-                                <a href="" class="btn btn-primary btn-block">More Info</a>
-                            </div>
+                @foreach ($latest_listings as $listing)
+                    
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card listing-preview">
+                      <img class="card-img-top" src="assets/img/homes/home-1.jpg" alt="">
+                      <div class="card-img-overlay">
+                        <h2>
+                          <span class="badge badge-secondary text-white">{{ $listing -> price }}</span>
+                        </h2>
+                      </div>
+                      <div class="card-body">
+                        <div class="listing-heading text-center">
+                          <h4 class="text-primary">{{ $listing -> title }}</h4>
+                          <p>
+                            <i class="fas fa-map-marker text-secondary"></i></p>
                         </div>
+                        <hr>
+                        <div class="row py-2 text-secondary">
+                          <div class="col-6">
+                            <i class="fas fa-th-large"></i> Sqft: 2500</div>
+                          <div class="col-6">
+                            <i class="fas fa-car"></i> Garage: {{ $listing -> garage }}</div>
+                        </div>
+                        <div class="row py-2 text-secondary">
+                          <div class="col-6">
+                            <i class="fas fa-bed"></i> Bedrooms: {{ $listing -> bedroom }}</div>
+                          <div class="col-6">
+                            <i class="fas fa-bath"></i> Bathrooms: 2</div>
+                        </div>
+                        <hr>
+                        <div class="row py-2 text-secondary">
+                          <div class="col-12">
+                            <i class="fas fa-user"></i> {{ $listing -> realtor-> name }}</div>
+                        </div>
+                        <div class="row text-secondary pb-2">
+                          <div class="col-6">
+                            <i class="fas fa-clock"></i> {{ $listing -> created_at->diffForHumans() }} 
+                        </div>
+                        </div>
+                        <hr>
+                        <a href="{{}}" class="btn btn-primary btn-block">More Info</a>
+                      </div>
                     </div>
+                  </div>
+                
+                @endforeach
  
 
             </div>

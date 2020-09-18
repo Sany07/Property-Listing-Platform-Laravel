@@ -15,15 +15,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 
-Route::get('/', function () { 
-    return view('site.layouts.index');
-});
 
+Route::get('/', 'FrontEndController@index' )->name('index');
 Route::get('/about', 'FrontEndController@about' )->name('about');
 
 
 
-
+// , 'middleware' => 'auth'
 
 Route::group(['prefix' => 'admin'], function() {
 
@@ -42,3 +40,4 @@ Route::group(['prefix' => 'admin'], function() {
     
     // Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     
+

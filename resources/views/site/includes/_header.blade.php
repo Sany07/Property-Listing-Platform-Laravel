@@ -58,16 +58,23 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
+          @auth
           <li class="nav-item mr-3">
-            <a class="nav-link" href="register.html">
+            <a class="nav-link" href="{{ route('register') }}">
+              <i class="fas fa-user-plus"></i> Dashboard</a>
+          </li>
+          @else
+          <li class="nav-item mr-3">
+            <a class="nav-link" href="{{ route('register') }}">
               <i class="fas fa-user-plus"></i> Register</a>
           </li>
           <li class="nav-item mr-3">
-            <a class="nav-link" href="login.html">
+            <a class="nav-link" href="{{ route('login') }}">
               <i class="fas fa-sign-in-alt"></i>
 
               Login</a>
           </li>
+          @endif
         </ul>
       </div>
     </div>

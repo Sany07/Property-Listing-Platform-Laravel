@@ -19,6 +19,6 @@ class Realtor extends Model
 
     public function som(){
 
-        return $this->belongsTo(Som::class);
+        return $this->hasOne(Som::class);
     }
 }
