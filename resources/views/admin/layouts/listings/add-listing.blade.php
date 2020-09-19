@@ -72,6 +72,10 @@
                         <div class="form-group">
                             <label>Bedroom :</label>
                             <input type="number" name="bedroom" class="form-control" value="{{ old('bedroom') }}" placeholder="Bedroom">
+                        </div>                        
+                        <div class="form-group">
+                            <label>Bathroom :</label>
+                            <input type="number" name="bathroom" class="form-control" value="{{ old('bathroom') }}" placeholder="Bathroom">
                         </div>
   
                         <div class="form-group">

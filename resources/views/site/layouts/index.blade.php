@@ -161,7 +161,7 @@
                           <div class="col-6">
                             <i class="fas fa-bed"></i> Bedrooms: {{ $listing -> bedroom }}</div>
                           <div class="col-6">
-                            <i class="fas fa-bath"></i> Bathrooms: 2</div>
+                            <i class="fas fa-bath"></i> Bathrooms: {{ $listing -> bathroom }}</div>
                         </div>
                         <hr>
                         <div class="row py-2 text-secondary">

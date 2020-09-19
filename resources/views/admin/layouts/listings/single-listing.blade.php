@@ -111,7 +111,10 @@
                             <label>Bedroom :</label>
                             <input type="number" name="bedroom" class="form-control" value="{{ $listing -> bedroom }}" placeholder="Bedroom">
                         </div>
-  
+                        <div class="form-group">
+                            <label>Bathroom :</label>
+                            <input type="number" name="bathroom" class="form-control" value="{{ $listing -> bathroom }}" placeholder="Bathroom">
+                        </div>
                         <div class="form-group">
                             <label>Garage :</label>
                             <input type="number" name="garage" class="form-control"  value="{{ $listing -> garage }}" placeholder="Garage">

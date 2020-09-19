@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
-{% block title %} Properties | {% endblock %}
-{% block content %}
+@extends('site.base')
+@section('title')All Properties | @endsection
+@section('content')
 
     
 
@@ -37,88 +37,52 @@
 
         <!-- Listing 1 -->
 
-        {% for listing in listings %}
+        @foreach($listings as $listing)
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card listing-preview">
-            <img class="card-img-top" src="{{ listing.thumb_nail.url }}" alt="">
+            <img class="card-img-top" src="{{ url($listing ->thumbnail_0)}}" alt="">
             <div class="card-img-overlay">
               <h2>
-                <span class="badge badge-secondary text-white">${{ listing.price }}</span>
+                <span class="badge badge-secondary text-white">${{ $listing ->price }}</span>
               </h2>
             </div>
             <div class="card-body">
               <div class="listing-heading text-center">
-                <h4 class="text-primary">{{ listing.title }} </h4>
+                <h4 class="text-primary">{{ $listing ->title }} </h4>
                 <p>
-                  <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }}  {{ listing.state }}, {{ listing.zipcode }}</p>
+                  <i class="fas fa-map-marker text-secondary"></i> {{ $listing ->city }}  {{ $listing ->state }}, {{ $listing ->zipcode }}</p>
               </div>
               <hr>
               <div class="row py-2 text-secondary">
                 <div class="col-6">
-                  <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }} </div>
+                  <i class="fas fa-th-large"></i> Sqft: {{ $listing ->sqft }} </div>
                 <div class="col-6">
-                  <i class="fas fa-car"></i> Garage: {{ listing.garage }}</div>
+                  <i class="fas fa-car"></i> Garage: {{ $listing ->garage }}</div>
               </div>
               <div class="row py-2 text-secondary">
                 <div class="col-6">
-                  <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div>
+                  <i class="fas fa-bed"></i> Bedrooms: {{ $listing ->bedroom }}</div>
                 <div class="col-6">
-                  <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
+                  <i class="fas fa-bath"></i> Bathrooms: {{ $listing ->bathroom }}</div>
               </div>
               <hr>
               <div class="row py-2 text-secondary">
                 <div class="col-12">
-                  <i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                  <i class="fas fa-user"></i> {{ $listing -> realtor-> name }}</div>
               </div>
               <div class="row text-secondary pb-2">
                 <div class="col-6">
-                  <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
+                  <i class="fas fa-clock"></i> {{ $listing -> created_at->diffForHumans() }} </div>
               </div>
               <hr>
-              <a href="{{ listing.get_absolute_url }}" class="btn btn-primary btn-block">More Info</a>
+              <a href="{{ route('single.listing', $listing -> id) }}" class="btn btn-primary btn-block">More Info</a>
             </div>
           </div>
         </div>
 
-        {% endfor %}
+        @endforeach
       </div>
-      {% if is_paginated %}
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="pagination">
-              {% if page_obj.has_previous %}
-              <li class="page-item disabled">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-              </li>
-              {% else %}
-              <li class="page-item disabled">
-                  <a class="page-link">&laquo;</a>
-              </li>
-              {% endif %}
-              {% for i in page_obj.paginator.page_range %}
-                  {% if page_obj.number == i %}
-                    <li class="page-item active">
-                        <a class="page-link">{{ i }}</a>
-                    </li>
-                  {% else %}
-                      <li class="page-item">
-                          <a href="?page={{ i }}" class="page-link">{{ i }}</a>
-                      </li>
-                  {% endif %}
-              {% endfor %}
-              {% if page_obj.has_next %}
-                  <li class="page-item">
-                      <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
-                  </li>
-              {% else %}
-                  <li class="page-item disabled">
-                      <a class="page-link">&raquo;</a>
-                  </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-        {% endif %}
+
       </div>
   </section>
-{% endblock %}
+  @endsection

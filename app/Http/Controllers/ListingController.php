@@ -21,7 +21,6 @@ class ListingController extends Controller
     {
         $realtors = Realtor::all();
         return view('admin.layouts.listings.add-listing', compact('realtors'));
-
     }
 
 
@@ -31,18 +30,19 @@ class ListingController extends Controller
         // 'bedroom','garage', 'main_thumbnail','thumbnail_1',
         // 'thumbnail_2','thumbnail_3','thumbnail_4',
         // 'thumbnail_5','thumbnail_6','realtor_id'
-        
+
         $request->validate([
-            'title'=>'required',
-            'description'=>'required',
-            'price'=>'required',
-            'square_feet'=>'required',
-            'lot_size'=>'required',
-            'lot_size'=>'required',
-            'garage'=>'required',
-            'bedroom'=>'required',
-            'realtor_id'=>'required',
-            'is_published'=>'required',
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'square_feet' => 'required',
+            'lot_size' => 'required',
+            'lot_size' => 'required',
+            'garage' => 'required',
+            'bedroom' => 'required',
+            'bathroom' => 'required',
+            'realtor_id' => 'required',
+            'is_published' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
@@ -53,31 +53,29 @@ class ListingController extends Controller
             'square_feet' => $request->get('square_feet'),
             'lot_size' => $request->get('lot_size'),
             'bedroom' => $request->get('bedroom'),
+            'bathroom' => $request->get('bathroom'),
             'garage' => $request->get('garage'),
             'realtor_id' => $request->get('realtor_id'),
             'is_published' => $request->get('is_published'),
-        
+
         ]);
 
         //call custom file upload function
-        $isSuccess = $this -> massimageUploadHandler($request, $listing);
+        $isSuccess = $this->massimageUploadHandler($request, $listing);
 
-        if($isSuccess){
+        if ($isSuccess) {
             $listing->save();
             return redirect(route('listings.index'))->with('success', 'Listing Added!');
-        }else{
+        } else {
             return redirect()->back()->with('error', 'Something went wrong!');
-
         }
-        
-    
     }
 
 
     public function show($id)
     {
         $listing = Listing::findOrFail($id);
-        return view('admin.layouts.listings.single-listing',compact('listing'));
+        return view('admin.layouts.listings.single-listing', compact('listing'));
     }
 
 
@@ -90,36 +88,35 @@ class ListingController extends Controller
         $listing = Listing::findOrFail($id);
 
 
-        $listing ->title = $request->get('title');
-        $listing ->description = $request->get('description');
-        $listing ->price= $request->get('price');
-        $listing ->square_feet= $request->get('square_feet');
-        $listing ->lot_size= $request->get('lot_size');
-        $listing ->garage= $request->get('garage');
-        $listing ->bedroom= $request->get('bedroom');
-        $listing ->realtor_id = $request->get('realtor_id');
-        $listing ->is_published = $request->get('is_published');
+        $listing->title = $request->get('title');
+        $listing->description = $request->get('description');
+        $listing->price = $request->get('price');
+        $listing->square_feet = $request->get('square_feet');
+        $listing->lot_size = $request->get('lot_size');
+        $listing->garage = $request->get('garage');
+        $listing->bedroom = $request->get('bedroom');
+        $listing->bathroom = $request->get('bathroom');
+        $listing->realtor_id = $request->get('realtor_id');
+        $listing->is_published = $request->get('is_published');
 
 
         //function for image upload
-        $this -> massimageUploadHandler($request, $listing);
+        $this->massimageUploadHandler($request, $listing);
         $listing->save();
         return redirect(route('listings.index'))->with('success', 'Listing Updated Successfully!');
-        
     }
 
 
     public function destroy($id)
     {
         $listing = Listing::findOrFail($id);
-    
-        $isSuccess = $listing -> delete();
 
-        if($isSuccess){
-            $this -> imageDeleteHandler($listing);
+        $isSuccess = $listing->delete();
+
+        if ($isSuccess) {
+            $this->imageDeleteHandler($listing);
         }
         return redirect(route('listings.index'))->with('success', 'Listing Deleted Successfully!');
-        
     }
 
 
@@ -128,51 +125,50 @@ class ListingController extends Controller
     {
         $isSuccess = FALSE;
         $images = array(
-            $request->image, 
-            $request->image_one, 
-            $request->image_two, 
-            $request->image_three, 
-            $request->image_four, 
-            $request->image_five, 
-            $request->image_six, 
+            $request->image,
+            $request->image_one,
+            $request->image_two,
+            $request->image_three,
+            $request->image_four,
+            $request->image_five,
+            $request->image_six,
         );
-        
+
         foreach ($images as $key => $image) {
 
-           
-            if(file_exists($image)){
-                
-                $isSuccess =$this->imageUploadHandler($image,$listing,$key);                
-                
-            }            
+
+            if (file_exists($image)) {
+
+                $isSuccess = $this->imageUploadHandler($image, $listing, $key);
+            }
         }
-        return $isSuccess;         
-        
+        return $isSuccess;
     }
 
     //method for image upload
 
-    private function imageUploadHandler($image, $listing, $key){
-        $image_new_name = time().'.'.$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();  
+    private function imageUploadHandler($image, $listing, $key)
+    {
+        $image_new_name = time() . '.' . $image->getClientOriginalName() . '.' . $image->getClientOriginalExtension();
         $isScucess = $image->move(public_path('images/listing'), $image_new_name);
-        if($isScucess){
-            $image_url = 'images/listing/'.$image_new_name;
-            $table_name = 'thumbnail_'.$key;
-            if(file_exists($listing->$table_name)){
-                unlink($listing->$table_name);                
-            }            
-            $listing->$table_name = $image_url;    
+        if ($isScucess) {
+            $image_url = 'images/listing/' . $image_new_name;
+            $table_name = 'thumbnail_' . $key;
+            if (file_exists($listing->$table_name)) {
+                unlink($listing->$table_name);
+            }
+            $listing->$table_name = $image_url;
 
             return TRUE;
-        return FALSE;
-            
-        }        
+            return FALSE;
+        }
     }
 
     //method for delete image from folder
-    private function imageDeleteHandler($listing){
+    private function imageDeleteHandler($listing)
+    {
         $images = array(
-            $listing->thumbnail_0, 
+            $listing->thumbnail_0,
             $listing->thumbnail_1,
             $listing->thumbnail_2,
             $listing->thumbnail_3,
@@ -181,9 +177,9 @@ class ListingController extends Controller
             $listing->thumbnail_6,
         );
         foreach ($images as $image) {
-            if(file_exists($image)){
-                unlink($image);                
-            }            
+            if (file_exists($image)) {
+                unlink($image);
+            }
         }
     }
 }

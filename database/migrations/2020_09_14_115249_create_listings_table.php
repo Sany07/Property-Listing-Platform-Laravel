@@ -23,6 +23,7 @@ class CreateListingsTable extends Migration
             $table->float('lot_size', 10, 2);
             $table->integer('bedroom');
             $table->integer('garage');
+            $table->integer('bathroom');
             $table->string('thumbnail_0');
             $table->string('thumbnail_1')->nullable();
             $table->string('thumbnail_2')->nullable();
