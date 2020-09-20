@@ -50,7 +50,7 @@
               <div class="listing-heading text-center">
                 <h4 class="text-primary">{{ $listing ->title }} </h4>
                 <p>
-                  <i class="fas fa-map-marker text-secondary"></i> {{ $listing ->city }}  {{ $listing ->state }}, {{ $listing ->zipcode }}</p>
+                  <i class="fas fa-map-marker text-secondary"></i> {{ $listing ->city }}  {{ $listing ->state }}</p>
               </div>
               <hr>
               <div class="row py-2 text-secondary">

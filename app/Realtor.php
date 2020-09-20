@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Realtor extends Model
 {
     protected $fillable = [
-        'name','address', 'email', 'contact_number'
+        'name','address', 'email', 'contact_number','image'
 
     ];
 

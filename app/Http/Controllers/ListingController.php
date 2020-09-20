@@ -26,11 +26,6 @@ class ListingController extends Controller
 
     public function store(Request $request)
     {
-        // 'title','description', 'price', 'square_feet','lot_size',
-        // 'bedroom','garage', 'main_thumbnail','thumbnail_1',
-        // 'thumbnail_2','thumbnail_3','thumbnail_4',
-        // 'thumbnail_5','thumbnail_6','realtor_id'
-
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -41,6 +36,8 @@ class ListingController extends Controller
             'garage' => 'required',
             'bedroom' => 'required',
             'bathroom' => 'required',
+            'city' => 'required',
+            'country' => 'required',
             'realtor_id' => 'required',
             'is_published' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
@@ -55,15 +52,19 @@ class ListingController extends Controller
             'bedroom' => $request->get('bedroom'),
             'bathroom' => $request->get('bathroom'),
             'garage' => $request->get('garage'),
+            'city' => $request->get('city'),
+            'country' => $request->get('country'),
             'realtor_id' => $request->get('realtor_id'),
             'is_published' => $request->get('is_published'),
 
         ]);
 
+
         //call custom file upload function
         $isSuccess = $this->massimageUploadHandler($request, $listing);
 
         if ($isSuccess) {
+            
             $listing->save();
             return redirect(route('listings.index'))->with('success', 'Listing Added!');
         } else {
@@ -96,6 +97,8 @@ class ListingController extends Controller
         $listing->garage = $request->get('garage');
         $listing->bedroom = $request->get('bedroom');
         $listing->bathroom = $request->get('bathroom');
+        $listing->city = $request->get('city');
+        $listing->country = $request->get('country');
         $listing->realtor_id = $request->get('realtor_id');
         $listing->is_published = $request->get('is_published');
 

@@ -82,6 +82,15 @@
                             <label>Garage :</label>
                             <input type="number" name="garage" class="form-control"  value="{{ old('garage') }}" placeholder="Garage">
                         </div>
+                          
+                        <div class="form-group">
+                            <label>City :</label>
+                            <input type="text" name="city" class="form-control"  value="{{ old('city') }}" placeholder="City">
+                        </div>                        
+                        <div class="form-group">
+                            <label>Country :</label>
+                            <input type="text" name="country" class="form-control"  value="{{ old('country') }}" placeholder="Country">
+                        </div>
                         <div class="form-group">
                             <label>Description :</label>
                             <textarea name="description" class="form-control" rows="5">{{ old('description') }}</textarea>

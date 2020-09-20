@@ -84,11 +84,11 @@
                 </li>
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-bed"></i> Bedrooms:
-                  <span class="float-right">{{ $listing ->bedrooms }}</span>
+                  <span class="float-right">{{ $listing ->bedroom }}</span>
                 </li>
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-bath"></i> Bathrooms:
-                  <span class="float-right">{{ $listing ->bathrooms }}</span>
+                  <span class="float-right">{{ $listing ->bathroom }}</span>
                 </li>
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-car"></i> Garage:
@@ -101,7 +101,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-th-large"></i> Square Feet:
-                  <span class="float-right">{{ $listing ->sqft }}</span>
+                  <span class="float-right">{{ $listing ->square_feet }}</span>
                 </li>
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-square"></i> Lot Size:
@@ -143,6 +143,7 @@
   </section>
 
   <!-- Inquiry Modal -->
+  <!-- Inquiry Modal -->
   <div class="modal fade" id="inquiryModal" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -152,7 +153,40 @@
             <span>&times;</span>
           </button>
         </div>
-
+        <div class="modal-body">
+          <form action="" method="POST">
+            @csrf
+              @auth
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+              @else
+                <input type="hidden" name="user_id" value="0">
+              @endif
+          
+              <input type="hidden" name="listing_id" value="{{ $listing ->id }}">
+              <div class="form-group">
+                <label for="property_name" class="col-form-label">Property:</label>
+                <input type="text" name="listing" class="form-control" value="{{ $listing ->title }}" disabled="">
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-form-label">Name:</label>
+            <input type="text" name="name" class="form-control"   @auth value="{{ Auth::user()->get_full_name() }}"@endif required>
+              </div>
+              <div class="form-group">
+                <label for="email" class="col-form-label">Email:</label>
+                <input type="email" name="email" class="form-control"  @auth value="{{ Auth::user()->email }}" @endif required>
+              </div>
+              <div class="form-group">
+                <label for="phone" class="col-form-label">Phone:</label>
+                <input type="text" name="phone" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message" class="col-form-label">Message:</label>
+                <textarea name="message" class="form-control" required></textarea>
+              </div>
+              <hr>
+              <input type="submit" value="Send" class="btn btn-block btn-secondary">
+            </form>
+        </div>
       </div>
     </div>
   </div>

@@ -148,7 +148,10 @@
                         <div class="listing-heading text-center">
                           <h4 class="text-primary">{{ $listing -> title }}</h4>
                           <p>
-                            <i class="fas fa-map-marker text-secondary"></i></p>
+                            <i class="fas fa-map-marker text-secondary"></i>
+                            {{ $listing -> city }} {{ $listing -> country }}
+                        
+                        </p>
                         </div>
                         <hr>
                         <div class="row py-2 text-secondary">
@@ -174,7 +177,7 @@
                         </div>
                         </div>
                         <hr>
-                        <a href="{{}}" class="btn btn-primary btn-block">More Info</a>
+                        <a href="{{ route('single.listing', $listing->id) }}" class="btn btn-primary btn-block">More Info</a>
                       </div>
                     </div>
                   </div>

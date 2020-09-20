@@ -1,6 +1,8 @@
-{% extends 'base.html' %}
-{% block title %} About Us | {% endblock %}
-{% block content %}
+
+@extends('site.base')
+
+@section('title') About Us | @endsection
+@section('content')
 
     <section id="showcase-inner" class="py-5 text-white">
         <div class="container">
@@ -41,11 +43,11 @@
             </div>
             <div class="col-md-4">
             <div class="card">
-                <img class="card-img-top" src="{{ mvp.realtor.photo.url }}" alt="Seller of the month">
+                <img class="card-img-top" src="{{ url($som -> realtor-> image) }}" alt="Seller of the month">
                 <div class="card-body">
                 <h5 class="card-title">Seller Of The Month</h5>
-                <h6 class="text-secondary">{{ mvp.realtor.name }}</h6>
-                <p class="card-text">{{ mvp.realtor.description }}
+                <h6 class="text-secondary">{{ $som ->realtor-> name }}</h6>
+                <p class="card-text">
                 </p>
                 </div>
             </div>
@@ -59,31 +61,31 @@
         <h2 class="display-4">We Work For You</h2>
         <h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem velit aperiam, unde aliquid at similique!</h4>
         <hr>
-        <a href="{% url 'listing:listings' %}" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
+    <a href="{{ route('listings') }}" class="btn btn-secondary text-white btn-lg">View Our Featured Listings</a>
     </section>
 
-    <!-- Team -->
-    <section id="team" class="py-5">
-        <div class="container">
-        <h2 class="text-center">Our Team</h2>
-        <div class="row text-center">
+  <!-- Team -->
+  <section id="team" class="py-5">
+    <div class="container">
+      <h2 class="text-center">Our Team</h2>
+      <div class="row text-center">
 
-            {% for team in realtors %}
-                <div class="col-md-4">
-                <img src="{{ team.photo.url }}" alt="" class="rounded-circle mb-3">
-                <h4>Kyle Brown</h4>
-                <p class="text-success">
-                    <i class="fas fa-award text-success mb-3"></i> Realtor</p>
-                <hr>
-                <p>
-                    <i class="fas fa-phone"></i> {{ team.phone }}</p>
-                <p>
-                    <i class="fas fa-envelope-open"></i> {{ team.email }}</p>
-                </div>
-            {% endfor %}
-
+        @foreach ($realtors as $realtor)
+        
+        <div class="col-md-4">
+          <img src="assets/img/realtors/kyle.jpg" alt="" class="rounded-circle mb-3">
+          <h4>{{ $realtor -> name }}</h4>
+          <p class="text-success">
+            <i class="fas fa-award text-success mb-3"></i> Realtor</p>
+          <hr>
+          <p>
+            <i class="fas fa-phone"></i> {{ $realtor -> contact_number }}</p>
+          <p>
+            <i class="fas fa-envelope-open"></i> {{ $realtor -> email }}</p>
         </div>
-        </div>
-    </section>
+        @endforeach
+      </div>
+    </div>
+  </section>
 
-{% endblock %}
+@endsection
