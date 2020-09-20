@@ -20,6 +20,7 @@ Route::get('/', 'FrontEndController@index' )->name('index');
 Route::get('/listings', 'FrontEndController@listings' )->name('listings');
 Route::get('/listing/{id}', 'FrontEndController@listing' )->name('single.listing');
 Route::get('/about', 'FrontEndController@about' )->name('about');
+Route::post('/contact', 'ContactController@store' )->name('send-message');
 
 
 

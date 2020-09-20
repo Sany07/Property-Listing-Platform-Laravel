@@ -154,14 +154,8 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="" method="POST">
+        <form action="{{ route('send-message') }}" method="POST">
             @csrf
-              @auth
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-              @else
-                <input type="hidden" name="user_id" value="0">
-              @endif
-          
               <input type="hidden" name="listing_id" value="{{ $listing ->id }}">
               <div class="form-group">
                 <label for="property_name" class="col-form-label">Property:</label>
@@ -177,7 +171,7 @@
               </div>
               <div class="form-group">
                 <label for="phone" class="col-form-label">Phone:</label>
-                <input type="text" name="phone" class="form-control">
+                <input type="text" name="contact_number" class="form-control">
               </div>
               <div class="form-group">
                 <label for="message" class="col-form-label">Message:</label>

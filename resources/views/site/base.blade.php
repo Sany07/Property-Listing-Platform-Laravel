@@ -13,9 +13,9 @@
 
 
     @include('site.includes._header')
-
+    @include('site.includes._notification')
     @yield('content')
-
+    
 
     @include('site.includes._footer')
 

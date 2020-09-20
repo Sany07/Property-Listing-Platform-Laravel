@@ -42,6 +42,7 @@
                 commodi id libero eveniet harum perferendis laborum molestias quia.</p>
             </div>
             <div class="col-md-4">
+            @if($som)
             <div class="card">
                 <img class="card-img-top" src="{{ url($som -> realtor-> image) }}" alt="Seller of the month">
                 <div class="card-body">
@@ -51,6 +52,7 @@
                 </p>
                 </div>
             </div>
+            @endif
             </div>
         </div>
         </div>

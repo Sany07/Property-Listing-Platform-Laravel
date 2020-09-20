@@ -39,7 +39,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <img src="assets/img/logo.png" class="logo" alt="">
+        <img src="{{ asset('assets/img/logo.png') }}" class="logo" alt="">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
         <span class="navbar-toggler-icon"></span>
@@ -63,6 +63,20 @@
             <a class="nav-link" href="{{ route('register') }}">
               <i class="fas fa-user-plus"></i> Dashboard</a>
           </li>
+          <li class="nav-item mr-3">
+
+          <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); 
+            document.getElementById('frm-logout').submit();">
+            <i class="fas fa-sign-in-alt"></i>  Logout
+          </a>    
+          <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+            {{-- <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit">Logout</button>
+            </form> --}}
+            </li>
           @else
           <li class="nav-item mr-3">
             <a class="nav-link" href="{{ route('register') }}">
