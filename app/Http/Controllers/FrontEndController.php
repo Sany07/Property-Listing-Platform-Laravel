@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use App\Listing;
 use App\Realtor;
 use App\Som;
+use App\Contact;
+use Illuminate\Support\Facades\Auth;
 
 class FrontEndController extends Controller
 {
@@ -35,10 +36,24 @@ class FrontEndController extends Controller
 
     public function about()
     {   
-        $realtors = Realtor::all();
+        $realtors = Contact::all();
         $som = Som::with('realtor')->first();
         
         return view('site.layouts.about',compact('som','realtors'));
     }
+
+
+    public function dashboard()
+    {   
+        if (Auth::check())
+        {
+            $userid = Auth::id();
+            $lists = Contact::with('listing')->where('user_id',$userid)->get();
+            return view('site.layouts.dashboard',compact('lists'));
+        }
+    }
+
+
+
 
 }

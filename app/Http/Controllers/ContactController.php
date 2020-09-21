@@ -30,6 +30,7 @@ class ContactController extends Controller
             'contact_number'=>'required',
             'message'=>'required',
             'listing_id' => 'required',
+            'user_id' => 'required',
 
         ]);
 
@@ -41,6 +42,7 @@ class ContactController extends Controller
             'contact_number' => $request->get('contact_number'),
             'description' => $request->get('message'),
             'listing_id' => $request->get('listing_id'),
+            'user_id' => $request->get('user_id'),
 
         ]);
 
@@ -51,11 +53,11 @@ class ContactController extends Controller
                 'alert-type' => 'success'
             );
             
-            return redirect()->back()->with($notification);
+            return redirect('/')->with($notification);
         } else {
             $notification = array(
                 'message' => 'Somthing Went wrong!',
-                'alert-type' => 'success'
+                'alert-type' => 'error'
             );
             return redirect()->back()->with($notification);
         }

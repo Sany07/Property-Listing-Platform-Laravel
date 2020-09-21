@@ -1,25 +1,28 @@
+@if(Session::has('message'))
+<script src="{{ asset('assets/js/toastr.js' ) }}"></script>
 <script>
-    @if(Session::has('message'))
+    (function($) {
 
-
-      var type = "{{ Session::get('alert-type', 'info') }}";
-    console.log(type);
+    var type = "{{ Session::get('alert-type', 'info') }}";
+        console.log(type);
       switch(type){
           case 'info':
-              toastr.info("{{ Session::get('message') }}");
-              break;
-          
+                toastr.info("{{ Session::get('message') }}");
+                break;
+            
           case 'warning':
-              toastr.warning("{{ Session::get('message') }}");
-              break;
+                toastr.warning("{{ Session::get('message') }}");
+                break;
   
           case 'success':
-              toastr.success("{{ Session::get('message') }}");
-              break;
+                toastr.success("{{ Session::get('message') }}");
+                break;
   
           case 'error':
               toastr.error("{{ Session::get('message') }}");
               break;
       }
-    @endif
+   
+})(jQuery);
 </script>
+@endif

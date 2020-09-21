@@ -22,6 +22,9 @@ class CreateContactsTable extends Migration
             $table->foreignId('listing_id')->nullable()
             ->constrained()
             ->onDelete('set null');
+            $table->foreignId('user_id')->nullable()
+            ->constrained()
+            ->onDelete('set null');
             $table->timestamps();
         });
     }

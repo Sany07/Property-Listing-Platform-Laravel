@@ -157,6 +157,7 @@
         <form action="{{ route('send-message') }}" method="POST">
             @csrf
               <input type="hidden" name="listing_id" value="{{ $listing ->id }}">
+              <input type="hidden" name="user_id" value="{{ Auth::id() }}">
               <div class="form-group">
                 <label for="property_name" class="col-form-label">Property:</label>
                 <input type="text" name="listing" class="form-control" value="{{ $listing ->title }}" disabled="">

@@ -60,7 +60,7 @@
         <ul class="navbar-nav ml-auto">
           @auth
           <li class="nav-item mr-3">
-            <a class="nav-link" href="{{ route('register') }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
               <i class="fas fa-user-plus"></i> Dashboard</a>
           </li>
           <li class="nav-item mr-3">
