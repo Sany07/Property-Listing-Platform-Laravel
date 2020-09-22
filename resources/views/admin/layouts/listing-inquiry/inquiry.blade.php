@@ -11,7 +11,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Basic Table</h4>
+                        <h4 class="page-title">Inquiries</h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
@@ -20,7 +20,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="#">Home</a>
                                     </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Realtors</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Inquiries</li>
                                 </ol>
                             </nav>
                         </div>
@@ -42,39 +42,36 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">All Realtors</h4>
-                                <a href="{{ route('realtors.create') }}"><span class="tr btn btn-sm btn-rounded btn-info">Add Realtors</span></a>
+                                <h4 class="card-title">All Inquiries</h4>
                             </div>
                             <div class="table-responsive m-t-20">
                                 <table class="table table-bordered table-responsive-lg">
                                     <thead>
                                         <tr>
+
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Contact</th>
-                                            <th scope="col">Image</th>
+                                            <th scope="col">Contact Number</th>
+                                            <th scope="col">Listing</th>
+                                            <th scope="col">User</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($realtors as $realtor)
-                                        <tr>
-                                            <th scope="row">{{ $realtor -> id }}</th>
-                                            <td>{{ $realtor -> name }}</td>
-                                            <td>{{ $realtor -> email }}</td>
-                                            <td>{{ $realtor -> contact_number }}</td>
-                                            <td>{{ $realtor -> address }}</td>
-                                            <td>
-                                            <a href="{{ route('realtors.show', $realtor -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
 
-                                            <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $realtor -> id) }}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
-                                      
-                                            </form>
-                                        </td>
+                                        @foreach($inquiries as $inquiry)
+                                        <tr id="row_{{$inquiry->id}}">
+                                            <th scope="row">{{ $loop->iteration }}</th>
+                                            <td>{{ $inquiry -> name }}</td>
+                                            <td>{{ $inquiry -> email }}</td>
+                                            <td>{{ $inquiry -> contact_number }}</td>
+                                            <td>{{ $inquiry -> listing-> title }}</td>
+                                            <td>{{ $inquiry -> user-> username }}</td>
+                                            <td>
+                                                <a href="{{ route('inquiry.show', $inquiry -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
+                                            </td>
+                                            
                                         </tr>
                                         @endforeach
 
@@ -102,4 +99,6 @@
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
+
+        
 @endsection

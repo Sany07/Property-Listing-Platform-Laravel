@@ -11,16 +11,16 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">Basic Table</h4>
+                        <h4 class="page-title">Listings</h4>
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
-                                        <a href="#">Home</a>
+                                        <a href="{{ route('admin.index') }}">Home</a>
                                     </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Realtors</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Listings</li>
                                 </ol>
                             </nav>
                         </div>
@@ -77,12 +77,12 @@
                                             <td>
                                             <a href="{{ route('listings.show', $listing -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
 
-                                            <form style="display:inline-block" method="POST" action="{{ route('listings.destroy', $listing -> id) }}">
+                                            {{-- <form style="display:inline-block" method="POST" action="{{ route('listings.destroy', $listing -> id) }}">
                                             @csrf
                                             @method('DELETE')
                                             
                                            <button  type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
-                                            </form>
+                                            </form> --}}
                                            <button onclick="deleteData('{{ route('listings.destroy', $listing -> id) }}','{{ $listing -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
 
                                         </td>

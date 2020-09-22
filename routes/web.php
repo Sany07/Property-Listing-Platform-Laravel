@@ -1,20 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Auth::routes();
-
-
 
 Route::get('/', 'FrontEndController@index' )->name('index');
 Route::get('/listings', 'FrontEndController@listings' )->name('listings');
@@ -25,14 +14,17 @@ Route::post('/contact', 'ContactController@store' )->name('send-message');
 
 
 
-// , 'middleware' => 'auth'
 
-Route::group(['prefix' => 'admin'], function() {
 
-    Route::get('index', 'AdminController@index' )->name('admin.index');
+// 'middleware' => 'auth'
+// ['middleware'=>'auth']
+Route::group(['prefix' => 'back'], function() {
+
+    Route::get('/', 'AdminController@index' )->name('admin.index');
     Route::resource('listings', 'ListingController');
     Route::resource('realtors', 'RealtorController');
     Route::resource('som', 'SellerOftheMonth');
+    Route::resource('inquiry', 'InquiryController');
 
 });
 
