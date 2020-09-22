@@ -46,20 +46,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
-          <li class="nav-item active mr-3">
+        <li class="nav-item {{ (request()->routeIs('index')) ? 'active' : '' }}  mr-3">
             <a class="nav-link" href="{{ route('index') }}">Home</a>
           </li>
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3 {{ (request()->routeIs('about')) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('about') }}">About</a>
           </li>
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3 {{ (request()->routeIs('listings')) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('listings') }}">Featured Listings</a>
           </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">
           @auth
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3 {{ (request()->routeIs('dashboard')) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
               <i class="fas fa-user-plus"></i> Dashboard</a>
           </li>
@@ -78,11 +78,11 @@
             </form> --}}
             </li>
           @else
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3 {{ (request()->routeIs('register')) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('register') }}">
               <i class="fas fa-user-plus"></i> Register</a>
           </li>
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3 {{ (request()->routeIs('login')) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('login') }}">
               <i class="fas fa-sign-in-alt"></i>
 
