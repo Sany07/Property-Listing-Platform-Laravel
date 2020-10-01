@@ -8,7 +8,7 @@ class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 0 -> admin  1->Realtor  2-> User
      * @return void
      */
     public function up()
@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('username')->unique();
             $table->string('email')->unique();
+            $table-> enum('role',['0','1','2']); //0 -> admin  1->Realtor  2-> User
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
