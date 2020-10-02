@@ -18,7 +18,7 @@ Route::post('/contact', 'ContactController@store' )->name('send-message');
 // 'middleware' => 'auth'
 // ['middleware'=>'auth']
 // isauthorize:0 -> 0 == admin
-Route::group(['prefix' => 'back','middleware' => 'isauthorize:0'], function() {
+Route::group(['prefix' => 'back','middleware' => 'auth', 'isauthorize:0'], function() {
 
     Route::get('/', 'AdminController@index' )->name('admin.index');
     Route::resource('listings', 'ListingController');

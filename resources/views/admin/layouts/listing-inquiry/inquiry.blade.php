@@ -77,6 +77,10 @@
 
                                     </tbody>
                                 </table>
+                                 {{-- Pagination --}}
+                                <div class="d-flex justify-content-left py-5 ">
+                                    {!! $inquiries->links() !!}
+                                </div>
                             </div>
                         </div>
                     </div>

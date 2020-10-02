@@ -133,6 +133,7 @@ $(function() {
         $('.show-left-part').toggleClass('ti-menu');
     });
 
+
     
 $(function () {
     bsCustomFileInput.init();

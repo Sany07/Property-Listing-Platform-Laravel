@@ -14,7 +14,8 @@ class InquiryController extends Controller
      */
     public function index()
     {
-        $inquiries = Contact::orderBy('id', 'DESC')->get();
+        //->latest()
+        $inquiries = Contact::orderBy('id', 'DESC')->paginate(1);
         return view('admin.layouts.listing-inquiry.inquiry', compact('inquiries'));
     }
 

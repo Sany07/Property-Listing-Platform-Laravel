@@ -46,7 +46,7 @@
                                 <a href="{{ route('listings.create') }}"><span class="tr btn btn-sm btn-rounded btn-info">Add Realtors</span></a>
                             </div>
                             <div class="table-responsive m-t-20">
-                                <table class="table table-bordered table-responsive-lg">
+                                <table id="" class="table table-bordered table-responsive-lg">
                                     <thead>
                                         <tr>
 
