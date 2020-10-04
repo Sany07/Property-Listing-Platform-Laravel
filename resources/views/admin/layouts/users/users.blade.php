@@ -11,16 +11,15 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        {{-- <h4 class="page-title">Basic Table</h4> --}}
                     </div>
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item">
-                                        <a href="#">Home</a>
+                                        <a href="{{ route('admin.index') }}">Home</a>
                                     </li>
-                                    <li class="breadcrumb-item active" aria-current="page">Realtors</li>
+                                    <li class="breadcrumb-item active" aria-current="page">users</li>
                                 </ol>
                             </nav>
                         </div>
@@ -42,38 +41,35 @@
                         <div class="card">
                             <div class="card-body">
 
-                                <h4 class="card-title">All Realtors</h4>
-                                <a href="{{ route('realtors.create') }}"><span class="tr btn btn-sm btn-rounded btn-info">Add Realtors</span></a>
+                                <h4 class="card-title">All users</h4>
                             </div>
-                            <div class="table-responsive m-t-20">
+                            <div class="table-responsive m-t-20 p-2">
                                 <table class="table table-bordered table-responsive-lg">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
+                                            <th scope="col">Username</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Contact</th>
-                                            <th scope="col">Image</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($realtors as $realtor)
-                                        <tr id="row_{{$realtor->id}}">
+                                        @foreach($users as $user)
+                                        <tr id="row_{{$user->id}}">
                                             <th scope="row">{{ $loop->iteration }}</th>
-                                            <td>{{ $realtor -> name }}</td>
-                                            <td>{{ $realtor -> email }}</td>
-                                            <td>{{ $realtor -> contact_number }}</td>
-                                            <td>{{ $realtor -> address }}</td>
+                                            <td>{{ $user -> get_full_name() }}</td>
+                                            <td>{{ $user -> username }}</td>
+                                            <td>{{ $user -> email }}</td>
                                             <td>
-                                            <a href="{{ route('realtors.show', $realtor -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
+                                            <a href="{{ route('users.show', $user -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
 
-                                            <form style="display:inline-block" method="POST" action="{{ route('realtors.destroy', $realtor -> id) }}">
+                                            <form style="display:inline-block" method="POST" action="{{ route('users.destroy', $user -> id) }}">
                                             @csrf
                                             @method('DELETE')
                                             
                                         </form>
-                                        <button onclick="deleteData('{{ route('realtors.destroy', $realtor -> id) }}','{{ $realtor -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
+                                        <button onclick="deleteData('{{ route('users.destroy', $user -> id) }}','{{ $user -> id }}')" type="submit" class="btn btn-sm btn-rounded btn-danger">Delete</button>
                                         </td>
                                         </tr>
                                         @endforeach

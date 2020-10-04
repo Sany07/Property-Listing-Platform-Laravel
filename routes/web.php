@@ -23,8 +23,9 @@ Route::group(['prefix' => 'back','middleware' => 'auth', 'isauthorize:0'], funct
     Route::get('/', 'AdminController@index' )->name('admin.index');
     Route::resource('listings', 'ListingController');
     Route::resource('realtors', 'RealtorController');
+    Route::resource('users', 'UserController');
     Route::resource('som', 'SellerOftheMonth');
-    Route::resource('inquiry', 'InquiryController');
+    Route::resource('inquiries', 'InquiryController');
 
 });
 

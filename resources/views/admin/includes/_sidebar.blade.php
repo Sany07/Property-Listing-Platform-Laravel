@@ -14,6 +14,12 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users.index') }}" aria-expanded="false">
+                        <i class="mdi mdi-account-location"></i>
+                        <span class="hide-menu">Users</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('listings.index') }}" aria-expanded="false">
                         <i class="mdi mdi-account-network"></i>
                         <span class="hide-menu">Listings</span>
@@ -32,7 +38,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('inquiry.index') }}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('inquiries.index') }}" aria-expanded="false">
                         <i class="mdi mdi-border-none"></i>
                         <span class="hide-menu">Inquiry</span>
                     </a>

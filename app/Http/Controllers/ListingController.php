@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Listing;
-use App\Realtor;
+use App\{
+    Listing, Realtor
+};
 
 
 class ListingController extends Controller
@@ -13,7 +14,11 @@ class ListingController extends Controller
     public function index()
     {
         $listings = Listing::orderBy('id', 'DESC')->get();
-        return view('admin.layouts.listings.listings', compact('listings'));
+        $published_listings = $listings->where('is_published', '1');
+        $unpublished_listings = $listings->where('is_published', '0');
+        return view('admin.layouts.listings.listings', compact('published_listings','unpublished_listings'));
+        // $listings = Listing::where('is_published', '1')->orderBy('id', 'DESC')->get();
+
     }
 
 

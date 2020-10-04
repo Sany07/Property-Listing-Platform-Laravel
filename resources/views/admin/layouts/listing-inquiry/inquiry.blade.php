@@ -69,7 +69,7 @@
                                             <td>{{ $inquiry -> listing-> title }}</td>
                                             <td>{{ $inquiry -> user-> username }}</td>
                                             <td>
-                                                <a href="{{ route('inquiry.show', $inquiry -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
+                                                <a href="{{ route('inquiries.show', $inquiry -> id ) }}"><span class="btn btn-sm btn-rounded btn-success">View</span></a>
                                             </td>
                                             
                                         </tr>
@@ -78,7 +78,7 @@
                                     </tbody>
                                 </table>
                                  {{-- Pagination --}}
-                                <div class="d-flex justify-content-left py-5 ">
+                                <div class="d-flex justify-content-center py-5 ">
                                     {!! $inquiries->links() !!}
                                 </div>
                             </div>

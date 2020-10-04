@@ -108,3 +108,9 @@
 .progress-bar-primary {
     background-color: #1e88e5;
 }
+.m-t-20 {
+    margin-top: 20px;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
