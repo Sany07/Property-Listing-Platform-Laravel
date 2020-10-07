@@ -10,6 +10,8 @@ Route::get('/listings', 'FrontEndController@listings' )->name('listings');
 Route::get('/listing/{id}', 'FrontEndController@listing' )->name('single.listing');
 Route::get('/dashboard', 'FrontEndController@dashboard' )->name('dashboard');
 Route::get('/about', 'FrontEndController@about' )->name('about');
+Route::get('/query', 'searchController@search' )->name('search');
+Route::get('/search', 'searchController@result' )->name('result');
 Route::post('/contact', 'ContactController@store' )->name('send-message');
 
 
@@ -18,7 +20,7 @@ Route::post('/contact', 'ContactController@store' )->name('send-message');
 // 'middleware' => 'auth'
 // ['middleware'=>'auth']
 // isauthorize:0 -> 0 == admin
-Route::group(['prefix' => 'back','middleware' => 'auth', 'isauthorize:0'], function() {
+Route::group(['prefix' => 'back','middleware' => 'isauthorize:0'], function() {
 
     Route::get('/', 'AdminController@index' )->name('admin.index');
     Route::resource('listings', 'ListingController');
