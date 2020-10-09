@@ -36,7 +36,7 @@
       <div class="row">
 
         <!-- Listing 1 -->
-
+@if(count($listings) > 0)
         @foreach($listings as $listing)
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card listing-preview">
@@ -81,6 +81,10 @@
         </div>
 
         @endforeach
+      @else
+          No Details found. Try to search again !!
+      @endif
+
       </div>
 
       </div>

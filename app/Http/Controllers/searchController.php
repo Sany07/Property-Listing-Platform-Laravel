@@ -36,7 +36,7 @@ class searchController extends Controller
                         return view('site.layouts.search',compact('listings'))->withQuery ( $keywords );
                     
                     }
-                    else return view ('site.layouts.search')->withMessage('No Details found. Try to search again !');
+                    else return view ('site.layouts.search',compact('listings'))->withMessage('No Details found. Try to search again !');
 
     }
 

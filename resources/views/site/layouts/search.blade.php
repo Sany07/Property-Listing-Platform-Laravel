@@ -140,7 +140,7 @@
 <section id="listings" class="py-4">
   <div class="container">
     <div class="row">
-
+      @if(count($listings) > 0)
       <!-- Listing 1 -->
       @foreach($listings as $listing)
       <div class="col-md-6 col-lg-4 mb-4">
