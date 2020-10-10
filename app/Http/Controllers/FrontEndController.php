@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Listing;
-use App\Realtor;
-use App\Som;
-use App\Contact;
+use App\{
+    Listing,
+    Realtor,
+    Contact,
+    Som,
+};
+
 use Illuminate\Support\Facades\Auth;
 
 class FrontEndController extends Controller
@@ -36,7 +39,7 @@ class FrontEndController extends Controller
 
     public function about()
     {   
-        $realtors = Contact::all();
+        $realtors = Realtor::all();
         $som = Som::with('realtor')->first();
         
         return view('site.layouts.about',compact('som','realtors'));

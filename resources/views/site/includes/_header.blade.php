@@ -7,10 +7,12 @@
         <div class="col-md-4">
           <i class="fas fa-phone"></i> 
          <!-- site_config.phone  -->
+         8801751006793
         </div>
         <div class="col-md-4">
           <i class="fas fa-envelope-open"></i> 
           <!-- site_config.email  -->
+          sany.baust@gmail.com
         </div>
         <div class="col-md-4">
           <div class="social text-right">

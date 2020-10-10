@@ -75,7 +75,7 @@
         @foreach ($realtors as $realtor)
         
         <div class="col-md-4">
-          <img src="assets/img/realtors/kyle.jpg" alt="" class="rounded-circle mb-3">
+          <img src="{{ url($realtor -> image) }}" alt="" class="rounded-circle mb-3">
           <h4>{{ $realtor -> name }}</h4>
           <p class="text-success">
             <i class="fas fa-award text-success mb-3"></i> Realtor</p>

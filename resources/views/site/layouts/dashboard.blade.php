@@ -34,7 +34,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h2>Welcome John</h2>
+        <h2>Welcome @auth::id</h2>
         <p>Here are the property listings that you have inquired about</p>
         <table class="table">
           <thead>
