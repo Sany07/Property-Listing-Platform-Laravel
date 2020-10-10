@@ -21,7 +21,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">
+          <a href="/">
             <i class="fas fa-home"></i> Home</a>
         </li>
         <li class="breadcrumb-item active"> Dashboard</li>
@@ -34,7 +34,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h2>Welcome @auth::id</h2>
+        <h2>Welcome {{ Auth::user()->get_full_name() }} </h2>
         <p>Here are the property listings that you have inquired about</p>
         <table class="table">
           <thead>
