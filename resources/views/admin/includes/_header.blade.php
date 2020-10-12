@@ -22,9 +22,9 @@
                 </b>
                 <!--End Logo icon -->
                 <!-- Logo text -->
-                <span class="logo-text">
+                <span class="logo-text ml-5" style="color: #ddd;">
                     <!-- dark Logo text -->
-                        BTRE
+                        <b> BTRE </b>
                 </span>
             </a>
         </div>
@@ -75,11 +75,16 @@
               <!-- User profile and search -->
               <!-- ============================================================== -->
               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../../assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                  <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->username }}</a>
                   <div class="dropdown-menu dropdown-menu-right user-dd animated">
                       <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                       <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                      <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Inbox</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); 
+                        document.getElementById('frm-logout').submit();">
+                        <i class="ti-email m-r-5 m-l-5"></i> Logout</a>
+                      <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                      </form>
                   </div>
               </li>
               <!-- ============================================================== -->
