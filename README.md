@@ -6,7 +6,7 @@ Laravel Property Listing Platform.
 ## Installation
 
 ```
-open terminal and type
+Open terminal and type
 https://github.com/Sany07/property-listing-platform-laravel.git
 
 or simply download using the url below
