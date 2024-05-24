@@ -1,4 +1,4 @@
-
+ 
 # Property Listing Platform
 Laravel Property Listing Platform.  
  
